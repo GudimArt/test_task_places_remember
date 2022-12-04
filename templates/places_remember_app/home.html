@@ -1,19 +1,47 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page</title>
     <!-- My CSS -->
-    <link rel="stylesheet" href="{% static 'css/my_style.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/my_style.css' %}">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <!-- Bootstrap JS-->
     <script src="{% static 'js/bootstrap.js' %}"></script>
 </head>
+
 <body>
+    {% if request.user.is_authenticated %}
+
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <div class="container h-100">
+                <div class="row w-100 align-items-center ">
+                    <div class="col-1 text-start">
+                        <img src={{ request.user.profile.avatar }} width="50" height="50"
+                            onerror="this.src='static/images/default_avatar.png'">
+                    </div>
+                    <div class="col">
+                        <p class='m-0'>{{ request.user.username }} </p>
+                    </div>
+                    <div class="col text-end">
+                        <a href="/logout">Выйти</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    {% if user_memory %}
+    <p>ББББ</p>
+    {% else %}
+    <p>Аааа</p>
+    {% endif %}
+    {% else %}
     <section>
         <div class="container home__main">
             <div class="row h-100 align-items-center">
@@ -22,15 +50,17 @@
                         <h1>Сохрани свои впечатления Places Remember </h1>
                     </div>
                     <svg width="779" height="5" viewBox="0 0 779 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <line y1="2.5" x2="779" y2="2.5" stroke="black" stroke-width="5"/>
+                        <line y1="2.5" x2="779" y2="2.5" stroke="black" stroke-width="5" />
                     </svg>
                     <div class="discription">
                         <p>Сохрани свои впечатления Places Remember </p>
                     </div>
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#selection_auth_popup">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#selection_auth_popup">
                         Войти
-                    </button> 
-                    <div class="modal fade" id="selection_auth_popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    </button>
+                    <div class="modal fade" id="selection_auth_popup" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -39,22 +69,24 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <button type="button" class="btn btn-outline-primary">
-                                        Войти c помощью vk
-                                    </button> 
-                                    <button type="button" class="btn btn-outline-primary">
-                                        Войти c помощью Google
-                                    </button> 
+                                    <a href="{% url 'social:begin' 'vk-oauth2' %}">
+                                        Войти c помощью Vk
+                                        </button>
+                                        <a href="{% url 'social:begin' 'google-oauth2' %}">
+                                            Войти c помощью Google
+                                            </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <div class="col-5">
+                    <div class="col-5">
 
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
-    
+    {% endif %}
+
 </body>
+
 </html>
