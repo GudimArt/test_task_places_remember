@@ -5,4 +5,6 @@ from .views import *
 urlpatterns = [
     path('', home, name='home'),
     path('logout/', authViews.LogoutView.as_view(), name='exit'),
+    path('add_memory/', add_memory, name='add_memory'),
+
 ]

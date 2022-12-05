@@ -38,7 +38,7 @@ class Memory(models.Model):
     '''
 
     title = models.CharField(max_length=30)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     address = models.CharField(max_length=1000)
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
@@ -47,5 +47,5 @@ class Memory(models.Model):
         verbose_name = "Воспоминание"
         verbose_name_plural = "Воспоминания"
 
-    def __repr__(self):
+    def __str__(self):
         return f'Воспоминание юзера {self.owner} - {self.title}'
