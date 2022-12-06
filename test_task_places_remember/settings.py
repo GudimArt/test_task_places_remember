@@ -157,7 +157,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Setting Vk_Auth
+# Settings Vk_Auth
 SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get(
     'SOCIAL_AUTH_VK_OAUTH2_KEY', "default_value")
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get(
@@ -165,9 +165,12 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get(
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 
 
-# Setting  Google _Auth
+# Settings  Google _Auth
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get(
     'SOCIAL_AUTH_GOOGLE_OAUTH2_KEY', "default_value")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(
     'SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET', "default_value")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
+
+
+YANDEX_MAPS_API_STR = os.environ.get('YANDEX_MAPS_API_STR')

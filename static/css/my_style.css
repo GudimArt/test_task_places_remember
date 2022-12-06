@@ -1,3 +1,8 @@
-.home__main{
+.home__main {
     height: 100vh;
+}
+
+.my_map {
+    width: 400px;
+    height: 400px;
 }
