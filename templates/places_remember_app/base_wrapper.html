@@ -1,0 +1,50 @@
+{% extends "places_remember_app/structure.html" %}
+{% load static %}
+{% block head_links %}
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Bootstrap JS-->
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{% static 'css/my_style.css' %}">
+    {% if request.user.is_authenticated %}
+        <!-- Api Yandex -->
+        <script src="https://api-maps.yandex.ru/2.1/?apikey={{ api_key }}&lang=ru_RU" type="text/javascript">
+        </script>
+    {% endif %}
+{% endblock head_links %}
+
+
+{% block head %}
+    {% if request.user.is_authenticated %}
+        <header>
+            <nav class="navbar shadow-sm sticky-top navbar-light bg-light">
+                <div class="container h-100">
+                    <div class="row w-100 align-items-center ">
+                        <div class="col-1 text-start">
+                            <img src={{ request.user.profile.avatar }} width="50" height="50"
+                                onerror="this.src='static/images/default_avatar.png'">
+                        </div>
+                        <div class="col">
+                            <p class='m-0'>{{ request.user.username }} </p>
+                        </div>
+                        <div class="col text-end">
+                            <a class="link-dark" href="/logout">Выйти</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    {% endif %}
+{% endblock head %}
+
+{% block page %}
+{% endblock page %}
+{% block body_links %}
+    <script> var apikey = "{{ api_key }}" </script>
+    <script type="text/javascript"src="{% static 'js/event_reverse_geocode.js' %}"></script>
+{% endblock body_links %}

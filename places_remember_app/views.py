@@ -18,7 +18,6 @@ def add_memory(request):
         if form.is_valid():
             try:
                 memory = form.save(commit=False)
-                memory.address = request.POST['address']
                 memory.owner = request.user
                 memory.save()
                 return redirect('/')

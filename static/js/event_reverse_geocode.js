@@ -32,7 +32,7 @@ function init() {
 
 
     myInputAddressSuggest.events.add('select', function (e) {
-        let url = 'https://geocode-maps.yandex.ru/1.x/?format=json&apikey={{ api_key }}&geocode=' + document.getElementById('id_address').value
+        let url = `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${apikey}&geocode=${myInputAddressElement.value}`
         let mapCoord = fetch(url).then(async (response) => {
             const data = await response.json();
             console.log(data)
