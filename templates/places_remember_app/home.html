@@ -9,8 +9,9 @@
         <div class="container d-flex align-items-center justify-content-center align-content-center flex-column mt-5">
             {% for i in user_memory %}
                 <div class="memory__header">
-                    <p>{{ i.title }}</p>
-                    <p>{{ i.address }}</p>
+                    <p class="col-2 m-0">{{ i.title }}</p>
+                    <p class="col-9 text-start m-0">{{ i.address }}</p>
+                    <a class="col-1 text-end link-dark" href="del_memory/{{ i.id }}">  <span aria-hidden="true">&times;</span> </a>
                 </div>
                 <div class="memory__description">
                     <p>{{ i.description }}</p>

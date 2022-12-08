@@ -148,11 +148,11 @@
     background-color: white;
     box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
     height: 3em;
-    align-items: flex-end;
+    align-items: center;
     align-content: center;
     padding-right: 2em;
     padding-left: 2em;
-    flex-direction: row;
+
 }
 
 .memory__description {
