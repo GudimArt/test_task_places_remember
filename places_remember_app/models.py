@@ -33,7 +33,7 @@ class UserProfile(models.Model):
 class Memory(models.Model):
     '''
     Класс-модель воспоминание, представляет из себя
-    данные об месте в котором был пользователя
+    данные об месте в котором был пользователь
     '''
 
     title = models.CharField(max_length=30)

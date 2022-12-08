@@ -37,10 +37,7 @@ function init() {
             const data = await response.json();
             console.log(data)
             let coords = data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ')
-            let a = coords[0]
-            let b = coords[1]
-            coords[0] = b
-            coords[1] = a
+            coords = [coords[1], coords[0]]
             myMap.setCenter(coords)
 
             if (myPlacemark) {

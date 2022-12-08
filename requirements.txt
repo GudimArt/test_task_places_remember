@@ -1,4 +1,3 @@
 django
 social-auth-app-django
-django-address
-dotenv
+python-dotenv
