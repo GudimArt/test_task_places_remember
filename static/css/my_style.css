@@ -168,6 +168,11 @@
     margin-bottom: 2em;
 }
 
+.memory_edit {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
 body {
     background-color: #C7EBFF;
     font-family: "Roboto",

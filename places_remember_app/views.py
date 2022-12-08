@@ -18,16 +18,18 @@ def add_memory(request):
         if request.method == 'POST':
             form = AddMemoryFrom(request.POST)
             if form.is_valid():
-                try:
-                    memory = form.save(commit=False)
-                    memory.owner = request.user
-                    memory.save()
-                    return redirect('/')
-                except:
-                    form.add_error(None, 'Ошибка добавления воспоминания')
+                memory = form.save(commit=False)
+                memory.owner = request.user
+                memory.save()
+                return redirect('/')
+            else:
+                form.add_error(None, 'Ошибка добавления воспоминания')
+                api_key = settings.YANDEX_MAPS_API_STR
+                return render(request, 'places_remember_app/memory_edit.html', locals())
         else:
             form = AddMemoryFrom()
-        return render(request, 'places_remember_app/home.html', {'form': form})
+            api_key = settings.YANDEX_MAPS_API_STR
+            return render(request, 'places_remember_app/memory_edit.html', locals())
     else:
         return HttpResponse("Вы НЕ авторизованы, чтобы добавить воспоминание")
 
