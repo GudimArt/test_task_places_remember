@@ -1,0 +1,150 @@
+{% extends "places_remember_app/base_wrapper.html" %}
+{% load static %}
+
+{% block title %} Main page {% endblock title %}
+
+{% block page %}
+{% if request.user.is_authenticated %}
+    {% if user_memory %}
+        <div class="container d-flex align-items-center justify-content-center align-content-center flex-column mt-5">
+            {% for i in user_memory %}
+                <div class="memory__header">
+                    <p class="col-2 m-0">{{ i.title }}</p>
+                    <p class="col-9 text-start m-0">{{ i.address }}</p>
+                    <a class="col-1 text-end link-dark" href="del_memory/{{ i.id }}">  <span aria-hidden="true">&times;</span> </a>
+                </div>
+                <div class="memory__description">
+                    <p>{{ i.description }}</p>
+                </div>
+            {% endfor %}
+            <div class="col">
+                <button type="button" class="btn btn-dark my_button" data-bs-toggle="modal"
+                    data-bs-target="#create_memory_popup">
+                    Добавить воспоминание
+                </button>
+                <div class="modal fade" id="create_memory_popup" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Places Remember</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-group" action="/add_memory/" method="post">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <div class="my_map" id="my_map"></div>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <input type="submit" class="btn btn-dark my_button" value="Сохранить">
+                                    </div
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+
+        <div class="container welcome-block authorized">
+            <div class="welcome-block__content">
+                <div class="welcome-block__title">
+                    <h1>Places Remember </h1>
+                </div>
+                <div class="welcome-block__space_for_img_back">
+                </div>
+                <div class="welcome-block__discription">
+                    <p>У вас нет ни одного воспоминания </p>
+                </div>
+                <div class="button_open_auth_popup">
+                    <button type="button" class="btn btn-dark my_button" data-bs-toggle="modal"
+                        data-bs-target="#create_memory_popup">
+                        Добавить воспоминание
+                    </button>
+                </div>
+            </div>
+            <div class="welcome-block__img">
+                <img src="{% static 'images/cloud.png' %}" alt="альтернативный текст">
+            </div>
+            <div class="container welcome-block__img-back">
+                <img src="{% static 'images/airplane.png' %}" alt="альтернативный текст">
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="create_memory_popup" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Places Remember</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-group" action="/add_memory/" method="post">
+                            {% csrf_token %}
+                            {{ form }}
+                            <div class="my_map" id="my_map"></div>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <input type="submit" class="btn btn-dark my_button" value="Сохранить">
+                            </div
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+{% else %}
+    <div class="container welcome-block">
+        <div class="welcome-block__content">
+            <div class="welcome-block__title">
+                <h1>Places Remember </h1>
+            </div>
+            <div class="welcome-block__space_for_img_back">
+            </div>
+            <div class="welcome-block__discription">
+                <p>Cервис для хранения  воспоминания о посещенных местах </p>
+            </div>
+            <div class="button_open_auth_popup">
+                <button type="button" class="btn btn-dark my_button" data-bs-toggle="modal"
+                    data-bs-target="#selection_auth_popup">
+                    Войти
+                </button>
+            </div>
+        </div>
+        <div class="welcome-block__img">
+            <img src="{% static 'images/cloud.png' %}" alt="альтернативный текст">
+        </div>
+        <div class="container welcome-block__img-back">
+            <img src="{% static 'images/airplane.png' %}" alt="альтернативный текст">
+        </div>
+    </div>
+    <div class="modal fade" id="selection_auth_popup" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Places Remember</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex  flex-column justify-content-center align-items-center">
+                    <a class="btn btn-dark my_button_auth" href="{% url 'social:begin' 'vk-oauth2' %}">
+                        Войти c помощью Vk
+                    </a>
+                    <a class="btn btn-dark my_button_auth" href="{% url 'social:begin' 'google-oauth2' %}">
+                        Войти c помощью Google
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock page %}
